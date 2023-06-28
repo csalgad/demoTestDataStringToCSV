@@ -18,6 +18,7 @@ def main():
 #FUNCTION definition
 #test_data_create: Returns a map of test data
 def test_data_create():
+    #Uppercase letters in alphabet
     alphabet = string.ascii_uppercase
     dataMap = {}
 
