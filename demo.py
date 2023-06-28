@@ -12,6 +12,9 @@ def main():
     #Instantiate a map
     tempDataMap = test_data_create()
 
+    print("Start of Debug: ")
+    print("data_map: ", tempDataMap)
+
     #Call Export CSV
     export_to_csv(tempDataMap, 'testOutput.csv')
 
