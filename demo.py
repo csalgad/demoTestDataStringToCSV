@@ -12,17 +12,31 @@ from google.cloud import speech
 #main: Main function
 def main():
     #Call Speech-to-Text
-    #HOLD# converted_text = gcloud_s2t()
+    #converted_text = gcloud_s2t()
+    converted_text = 'A 1 B 2 C 3'
 
+    #Instantiate the data map
+    primaryDataMap = {}    
+
+    #Instantiate the String text converted to an array of words
+    words = converted_text.split()
+
+    #Iterate through the split words
+    for i in range(len(words)):
+        if i%2 > 0:
+            print(i)
+            primaryDataMap[words[i-1]] = words[i]
+    
     #Instantiate a map
-    tempDataMap = test_data_create()
+    #tempDataMap = test_data_create()
+    tempDataMap = primaryDataMap
 
     #Debug
     print("Start of Debug: ")
     print("data_map: ", tempDataMap)
 
     #Call Export CSV
-    export_to_csv(tempDataMap, 'testOutput.csv')
+    export_to_csv(tempDataMap, 'testOutput2.csv')
 
 #FUNCTION definition
 #test_data_create: Returns a map of test data
@@ -52,7 +66,7 @@ def export_to_csv(data, filename):
     #Open file and write to tit
     with open(filename, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow(['Key', 'Value'])
+        writer.writerow(['Key', 'Value']) #String values
         for i in range(len(keys)):
             writer.writerow([keys[i], values[i]])
 
@@ -82,7 +96,8 @@ def gcloud_s2t():
     config = speech.RecognitionConfig(
         sample_rate_hertz=48000,
         enable_automatic_punctuation=True,
-        language_code='en-US'
+        language_code='en-US',
+        audio_channel_count=2,
     )
 
     #Transcribe audio with speech client's recognize() function
